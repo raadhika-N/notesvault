@@ -277,102 +277,134 @@ body {
   font-size: calc(9px + 0.4vw);
 }
 
-/*# sourceMappingURL=styles.css.map */
-=======
-
-.navbar {
-    /* Navbar container */
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px 40px;
-    background-color: #f7f9f7;
-    border-bottom: 1px solid #ccc;
-}
-
-.navbar-left {
-    /* Left section: logo and branding */
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-/* Branding container */
-.branding {
-    display: flex;
+@media (max-width: 768px) {
+  #header {
     flex-direction: column;
+    padding: 15px 0;
+  }
+  #header #header-title-box {
+    margin: 0;
     justify-content: center;
-    line-height: 1.2;
-}
-
-.logo {
-    /* Logo image style */
-    width: 80px;
-    height: auto;
-    object-fit: contain;
-}
-
-.branding h1 {
-    /* Brand name text */
-    margin: 0;
-    font-size: 20px;
-    font-weight: bold;
-    font-family: "Tektur", sans-serif;
-    color: #1e1e1e;
-}
-
-.tagline {
-    /* Tagline text under brand name */
-    margin: 0;
-    font-size: 12px;
-    font-family: "Tektur", sans-serif;
-    color: #555;
-}
-
-.navbar-center {
-    /* Center section: navigation links */
-    display: flex;
-    gap: 30px;
-    align-items: center;
-}
-
-.navbar-center a {
-    /* Navigation link style */
-    text-decoration: none;
-    color: #333;
-    position: relative;
-    font-size: 14px;
-}
-
-.navbar-center a.active::after {
-    /* Underline effect for active link */
-    content: "";
-    position: absolute;
-    bottom: -5px;
-    left: 0;
+    margin-bottom: 15px;
+  }
+  #header #header-title-box #header-title {
+    font-size: 24px;
+  }
+  #header #header-navigation {
     width: 100%;
-    height: 2px;
-    background-color: #333;
-}
-
-.navbar-right {
-    /* Right section: signup button */
-    display: flex;
-    align-items: center;
-}
-
-.navbar-right .signup-btn {
-    /* Signup button style */
-    background-color: #133f3f;
-    color: white;
-    padding: 8px 16px;
-    border-radius: 25px;
-    text-decoration: none;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 15px;
+  }
+  #header #header-navigation p {
     font-size: 14px;
-    transition: background-color 0.3s;
+    margin: 5px 10px;
+  }
+  #header #header-signup-box {
+    margin: 0;
+    justify-content: center;
+  }
+  #header #header-signup-box p {
+    font-size: 14px;
+    padding: 10px 25px;
+  }
+  #main {
+    flex-direction: column;
+    margin: 20px;
+    gap: 30px;
+  }
+  .main-left {
+    width: 100%;
+    text-align: center;
+  }
+  .main-left .main-heading {
+    font-size: 28px;
+    line-height: 1.4;
+  }
+  .main-left .main-text {
+    font-size: 16px;
+  }
+  .main-left-links {
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px;
+  }
+  .main-left-links .links-text {
+    margin: 0;
+    padding: 12px 25px;
+    font-size: 16px;
+    min-height: 45px;
+  }
+  .main-right {
+    width: 100%;
+  }
+  .main-right .main-right-box {
+    width: 100%;
+    max-width: 400px;
+  }
+  .main-right .main-right-search .main-right-search-form-input {
+    width: calc(100% - 80px);
+    padding: 15px 50px 15px 50px;
+    font-size: 16px;
+  }
+  .main-right .main-right-search .search-icon {
+    margin: 23px 20px;
+  }
+  .footer {
+    flex-direction: column;
+    margin: 20px;
+    gap: 30px;
+  }
+  .footer .footer-left-box {
+    max-width: 100%;
+    text-align: center;
+  }
+  .footer .footer-left-heading {
+    font-size: 20px;
+  }
+  .footer .footer-left-text {
+    font-size: 16px;
+  }
+  .footer .footer-left-link {
+    font-size: 16px;
+  }
+  .footer-right {
+    flex-direction: column;
+    gap: 20px;
+  }
+  .footer-right .footer-right-box {
+    width: 100%;
+    margin: 0;
+    padding: 20px;
+    text-align: center;
+  }
+  .footer-right .footer-right-box .footer-right-heading {
+    font-size: 18px;
+  }
+  .footer-right .footer-right-box .footer-right-text {
+    font-size: 14px;
+  }
+}
+@media (max-width: 1024px) and (min-width: 769px) {
+  #header #header-navigation {
+    width: 40vw;
+  }
+  #main {
+    margin: 30px;
+  }
+  #main .main-right .main-right-box {
+    width: 40vw;
+  }
+  #main .main-right .main-right-search .main-right-search-form-input {
+    width: calc(40vw - 130px);
+  }
+  .footer {
+    margin: 30px;
+  }
+  .footer .footer-right .footer-right-box {
+    width: 20vw;
+  }
 }
 
-.navbar-right .signup-btn:hover {
-    /* Hover effect for signup button */
-    background-color: #0f3333;
-}
+/*# sourceMappingURL=styles.css.map */
