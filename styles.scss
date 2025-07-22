@@ -337,7 +337,7 @@ body {
         }
         
         #header-signup-box {
-            margin: 0;
+            @extend .no-margin;
             justify-content: center;
             
             p {
