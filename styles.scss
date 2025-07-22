@@ -465,7 +465,7 @@ body {
             
             .main-right-search {
                 .main-right-search-form-input {
-                    width: calc(40vw - 130px);
+                    width: calc(40vw - $tablet-search-input-padding);
                 }
             }
         }
