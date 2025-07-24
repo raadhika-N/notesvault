@@ -30,6 +30,10 @@ function apiRequest(path, page = 1) {
       res.on('data', (chunk) => data += chunk);
       res.on('end', () => {
         try {
+          if (res.statusCode >= 400) {
+            reject(new Error(`HTTP ${res.statusCode}: ${data}`));
+            return;
+          }
           const jsonData = JSON.parse(data);
           resolve({
             data: jsonData,
@@ -42,22 +46,32 @@ function apiRequest(path, page = 1) {
     });
 
     req.on('error', reject);
+    req.setTimeout(30000, () => {
+      req.destroy();
+      reject(new Error('Request timeout'));
+    });
     req.end();
   });
 }
 
-// Fetch all pages of results
-async function fetchAllPages(path) {
+// Fetch all pages of results with rate limiting
+async function fetchAllPages(path, maxPages = 10) {
   let allData = [];
   let page = 1;
   let hasNextPage = true;
 
-  while (hasNextPage) {
+  while (hasNextPage && page <= maxPages) {
     try {
+      console.log(`Fetching page ${page} of ${path}...`);
       const response = await apiRequest(path, page);
       allData = allData.concat(response.data);
       hasNextPage = response.hasNextPage;
       page++;
+      
+      // Small delay to avoid hitting rate limits
+      if (hasNextPage) {
+        await new Promise(resolve => setTimeout(resolve, 100));
+      }
     } catch (error) {
       console.error(`Error fetching page ${page}:`, error.message);
       break;
@@ -71,8 +85,8 @@ async function generateLeaderboard() {
   try {
     console.log('Fetching closed issues with level labels...');
     
-    // Fetch closed issues with level labels
-    const issues = await fetchAllPages(`/repos/${REPO_OWNER}/${REPO_NAME}/issues?state=closed`);
+    // Fetch closed issues with level labels - limit to recent issues for performance
+    const issues = await fetchAllPages(`/repos/${REPO_OWNER}/${REPO_NAME}/issues?state=closed&sort=updated&direction=desc`, 5);
     
     console.log(`Found ${issues.length} closed issues`);
 
@@ -112,22 +126,21 @@ async function generateLeaderboard() {
 
     console.log(`Processing ${Object.keys(contributorStats).length} contributors...`);
 
-    // Fetch merged PRs for each contributor
-    for (const username of Object.keys(contributorStats)) {
-      try {
-        console.log(`Fetching PRs for ${username}...`);
-        const prs = await fetchAllPages(`/repos/${REPO_OWNER}/${REPO_NAME}/pulls?state=closed&sort=updated&direction=desc`);
-        
-        const userMergedPRs = prs.filter(pr => 
-          pr.user.login === username && 
-          pr.merged_at !== null
-        );
-        
+    // Fetch merged PRs for each contributor (optimize by checking only contributors with level completions)
+    const contributorUsernames = Object.keys(contributorStats);
+    if (contributorUsernames.length > 0) {
+      console.log('Fetching merged PRs...');
+      const prs = await fetchAllPages(`/repos/${REPO_OWNER}/${REPO_NAME}/pulls?state=closed&sort=updated&direction=desc`, 5);
+      
+      const mergedPRs = prs.filter(pr => pr.merged_at !== null);
+      console.log(`Found ${mergedPRs.length} merged PRs`);
+
+      // Count merged PRs for each contributor
+      contributorUsernames.forEach(username => {
+        const userMergedPRs = mergedPRs.filter(pr => pr.user.login === username);
         contributorStats[username].mergedPRs = userMergedPRs.length;
         console.log(`${username}: ${userMergedPRs.length} merged PRs`);
-      } catch (error) {
-        console.error(`Error fetching PRs for ${username}:`, error.message);
-      }
+      });
     }
 
     // Generate leaderboard markdown
@@ -175,6 +188,13 @@ This leaderboard tracks contributors who have completed issues labeled as \`leve
     
     console.log('✅ LEADERBOARD.md generated successfully!');
     console.log(`📊 Total contributors: ${sortedContributors.length}`);
+    
+    if (sortedContributors.length > 0) {
+      console.log('🏆 Top contributors:');
+      sortedContributors.slice(0, 3).forEach((contributor, index) => {
+        console.log(`${index + 1}. ${contributor.username} (${contributor.total} total contributions)`);
+      });
+    }
     
   } catch (error) {
     console.error('❌ Error generating leaderboard:', error);

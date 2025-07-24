@@ -67,6 +67,8 @@ We welcome all kinds of contributions, especially from beginners! Since the proj
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) to get started.
 
+Check out our [Contributors Leaderboard](LEADERBOARD.md) to see who's helping build NotesVault! 🏆
+
 ---
 
 ## 📄 License

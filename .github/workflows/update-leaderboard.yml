@@ -1,6 +1,7 @@
+---
 name: Update Leaderboard
 
-on:
+'on':
   push:
     branches: ["main"]
   pull_request:
@@ -36,16 +37,27 @@ jobs:
           REPO_OWNER: ${{ github.repository_owner }}
           REPO_NAME: ${{ github.event.repository.name }}
         run: |
+          echo "Generating leaderboard for $REPO_OWNER/$REPO_NAME..."
           node .github/scripts/generate-leaderboard.js
 
+      - name: Check for changes
+        id: check_changes
+        run: |
+          if git diff --quiet LEADERBOARD.md; then
+            echo "changes=false" >> $GITHUB_OUTPUT
+          else
+            echo "changes=true" >> $GITHUB_OUTPUT
+          fi
+
       - name: Commit and push changes
+        if: steps.check_changes.outputs.changes == 'true'
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git add LEADERBOARD.md
-          if git diff --staged --quiet; then
-            echo "No changes to commit"
-          else
-            git commit -m "Auto-update LEADERBOARD.md [skip ci]"
-            git push
-          fi
+          git commit -m "Auto-update LEADERBOARD.md [skip ci]"
+          git push
+
+      - name: No changes detected
+        if: steps.check_changes.outputs.changes == 'false'
+        run: echo "No changes to LEADERBOARD.md, skipping commit."
