@@ -480,8 +480,8 @@ body {
   gap: 2rem;
   margin: 5vw;
   max-width: 1200px;
-  margin-left: auto;
-  margin-right: auto;
+  /* margin-left: auto;
+  margin-right: auto; */
 }
 
 .About-left-box {
@@ -575,7 +575,7 @@ body {
   }
   #main {
     flex-direction: column;
-    margin: 4vw;
+    margin: 4vw auto;
     gap: 30px;
   }
   .main-right {
@@ -710,7 +710,7 @@ body {
     margin-right: 4vw;
   }
   #main {
-    margin: 4vw 2vw;
+    margin: 4vw auto;
   }
   .main-heading {
     font-size: calc(16px + 3vw);
@@ -800,7 +800,7 @@ body {
 @media screen and (max-width: 768px) {
   body {
     font-size: 14px;
-    padding-top: 8vh;
+    /* padding-top: 8vh; */
   }
   .container {
     padding: 10px;
@@ -1806,7 +1806,7 @@ main {
     color: black;
     position: absolute;
     right: 20px;
-    top: 15px;
+    /* top: 15px; */
     z-index: 1001;
   }
   .navbar-center,
