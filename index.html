@@ -19,110 +19,110 @@
   <body>
     <!-- Header -->
     <header class="navbar">
-      <div class="navbar-left">
-        <div class="logo">NotesVault</div>
-      </div>
+  <div class="navbar-left">
+    <div class="logo">NotesVault</div>
+  </div>
 
-      <div class="navbar-center" id="heade</div>r-navigation">
-        <a href="pages/overview.html">Overview</a>
-        <a href="pages/studentAccount.html">Student Account</a>
-        <a href="pages/about.html">About</a>
-        <a href="pages/features.html">Features</a>
-      </div>
+  <div class="navbar-center" id="header-navigation">
+    <a href="pages/overview.html">Overview</a>
+    <a href="pages/studentAccount.html">Student Account</a>
+    <a href="pages/about.html">About</a>
+    <a href="pages/features.html">Features</a>
+  </div>
 
-      <div class="navbar-right">
-        <a href="pages/signup.html" class="signup-btn">Sign Up</a>
-        <div id="hamburger" class="hamburger-icon">☰</div>
-      </div>
-    </header>
+  <div class="navbar-right">
+    <a href="pages/login.html" class="login-btn">Login</a> //added logIn
+    <a href="pages/signup.html" class="signup-btn">Sign Up</a>
+    <div id="hamburger" class="hamburger-icon">☰</div>
+  </div>
+</header>
+<!-- Main Section -->
+<main id="main">
+  <div class="main-left">
+    <h1 class="main-heading">
+      Your Go-To Companion for<br />Organized Learning.
+    </h1>
+    <p class="main-text">
+      Keep your study notes and PYQs organized, easy to find,<br />and
+      always just a click away with NotesVault.
+    </p>
+    <div class="main-left-links">
+      <a
+        href="search.html"
+        class="links-text try-box"
+        style="color: black; text-decoration: none"
+        >Browse Notes</a
+      >
+      <a
+        href="upload.html"
+        class="links-text try-box"
+        style="color: black; text-decoration: none"
+        >Upload Notes</a
+      >
+    </div>
+  </div>
 
-    <!-- Main Section -->
-    <main id="main">
-      <div class="main-left">
-        <p class="main-text welcome">Welcome Back</p>
-        <h1 class="main-heading">
-          Your Go-To Companion for<br />Organized Learning.
-        </h1>
-        <p class="main-text">
-          Keep your study notes and PYQs organized, easy to find,<br />and
-          always just a click away with NotesVault.
-        </p>
-        <div class="main-left-links">
-          <a
-            href="search.html"
-            class="links-text try-box"
-            style="color: black; text-decoration: none"
-            >Browse Notes</a
-          >
-          <a
-            href="upload.html"
-            class="links-text try-box"
-            style="color: black; text-decoration: none"
-            >Upload Notes</a
-          >
+  <div class="main-right">
+    <div class="main-right-box">
+      <div class="main-right-upper-box">
+        <div class="right-text-div">
+          <p class="right-text">Notes Organised by</p>
+          <p class="right-text" id="typeWriterText">Subject</p>
         </div>
-      </div>
 
-      <div class="main-right">
-        <div class="main-right-box">
-          <div class="main-right-upper-box">
-            <div class="right-text-div">
-              <p class="right-text">Notes Organised by</p>
-              <p class="right-text" id="typeWriterText">Subject</p>
-            </div>
-            <!--</nav> Search -->
-            <div class="Search-box bg-black h-[100px]">
-              <div class="main-right-search">
-                <form
-                  id="search-form"
-                  class="main-right-search-form"
-                  method="get"
-                  action="search.html"
+        <!-- Search -->
+        <div class="Search-box bg-black h-[100px]">
+          <div class="main-right-search">
+            <form
+              id="search-form"
+              class="main-right-search-form"
+              method="get"
+              action="search.html"
+            >
+              <div class="flex justify-evenly w-full items-center gap-20">
+                <input
+                  class="main-right-search-form-input"
+                  type="text"
+                  name="query"
+                  autocomplete="off"
+                  placeholder="Search"
+                />
+                <svg
+                  class="search-icon"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
                 >
-                  <div class="flex justify-evenly w-full items-center gap-20">
-                    <input
-                      class="main-right-search-form-input"
-                      type="text"
-                      name="query"
-                      autocomplete="off"
-                      placeholder="Search"
-                    />
-                    <svg
-                      class="search-icon"
-                      width="16"
-                      height="16"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    >
-                      <circle cx="11" cy="11" r="8"></circle>
-                      <path d="m21 21-4.35-4.35"></path>
-                    </svg>
-                  </div>
-
-                  <div
-                    id="search-parameters-branch"
-                    class="search-parameters-div"
-                  ></div>
-                  <div
-                    id="search-parameters-semester"
-                    class="search-parameters-div"
-                  ></div>
-                  <div
-                    id="search-parameters-subject"
-                    class="search-parameters-div"
-                  ></div>
-                  <input type="submit" style="display: none" />
-                </form>
+                  <circle cx="11" cy="11" r="8"></circle>
+                  <path d="m21 21-4.35-4.35"></path>
+                </svg>
               </div>
-            </div>
+
+              <div
+                id="search-parameters-branch"
+                class="search-parameters-div"
+              ></div>
+              <div
+                id="search-parameters-semester"
+                class="search-parameters-div"
+              ></div>
+              <div
+                id="search-parameters-subject"
+                class="search-parameters-div"
+              ></div>
+              <input type="submit" style="display: none" />
+            </form>
           </div>
         </div>
       </div>
-    </main>
+    </div>
+  </div>
+</main>
 
     <!-- Features Section -->
     <section
